@@ -1,0 +1,5 @@
+---
+smi_preflight_group_name: smi
+smi_fs_software_root: "/opt/epcc/smi/software"
+smi_fs_data_root: "/opt/epcc/smi/data"
+smi_base_dirs_allow_create_dirs: true

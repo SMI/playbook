@@ -1,0 +1,10 @@
+---
+# TODO(rkm 2023-10-27) Can probably combine these two somehow
+- name: "service_software : Delete smiservices_tempdir"
+  ansible.builtin.file:
+    name: "{{ smiservices_tempdir.path }}"
+    state: absent
+- name: "service_software : Delete rdmp_tempdir"
+  ansible.builtin.file:
+    name: "{{ rdmp_tempdir.path }}"
+    state: absent

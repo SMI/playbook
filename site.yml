@@ -5,18 +5,35 @@
   roles:
     - 00-preflight
   tags: [always]
-- name: Run system role on all hosts
+- name: Run system role on all hosts except localhost
   hosts: all,!localhost
   roles:
     - 01-system
   tags: [system]
 - name: Start Docker services
-  hosts: all
+  hosts: docker_host
   roles:
     - 02-docker-services
   tags: [never, docker]
-- name: Run service-software role on specified hosts
-  hosts: service_software,smi_aio_build,localhost
+- name: Install service software on primary file server
+  hosts: file_server
+  pre_tasks:
+    - name: Assert required variables are defined
+      ansible.builtin.assert:
+        that: vars[item] is defined
+        msg: "{{ item }} must be defined"
+      with_items:
+        - smi_fs_software_root
+        - smi_fs_data_root
+      tags: [always]
   roles:
-    - 10-service-software
-  tags: [software]
+    - role: 10-base-dirs
+      tags: [always]
+    - role: 11-bins
+      tags: [bins]
+    - role: 12-configs
+      tags: [configs]
+    - role: 13-data
+      tags: [data]
+    - role: 14-software
+      tags: [software]

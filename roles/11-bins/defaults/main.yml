@@ -1,0 +1,2 @@
+---
+smi_bins_bin_dir: "{{ smi_g_install_dir | default('/tmp/epcc/smi') }}/bin"

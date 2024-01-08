@@ -1,0 +1,17 @@
+---
+- name: Ensure bin directory exists
+  become: true
+  ansible.builtin.file:
+    name: "{{ smi_bins_bin_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: u=rwx,g=rx,o=rx
+
+- name: Template service scripts to bin
+  become: true
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: "{{ smi_bins_bin_dir }}"
+    mode: u=rwx,g=rx,o=rx
+  with_ansible.builtin.fileglob: templates/*

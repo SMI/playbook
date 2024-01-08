@@ -2,12 +2,12 @@
   "_comment": "{{ ansible_managed }}",
   "vhosts": [
     {
-      "name": "smi_{{ config_name }}_file_extract"
+      "name": "smi_{{ env_name }}_file_extract"
     }
   ],
   "policies": [
     {
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "name": "deadLetterExtract",
       "pattern": "",
       "apply-to": "queues",
@@ -20,7 +20,7 @@
   "exchanges": [
     {
       "name": "ControlExchange",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "type": "topic",
       "durable": true,
       "auto_delete": false,
@@ -29,7 +29,7 @@
     },
     {
       "name": "ExtractedFileStatusExchange",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "type": "direct",
       "durable": true,
       "auto_delete": false,
@@ -38,7 +38,7 @@
     },
     {
       "name": "ExtractedFileVerifiedExchange",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "type": "direct",
       "durable": true,
       "auto_delete": false,
@@ -47,7 +47,7 @@
     },
     {
       "name": "FileCollectionInfoExchange",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "type": "direct",
       "durable": true,
       "auto_delete": false,
@@ -56,7 +56,7 @@
     },
     {
       "name": "ExtractFileExchange",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "type": "direct",
       "durable": true,
       "auto_delete": false,
@@ -65,7 +65,7 @@
     },
     {
       "name": "RequestExchange",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "type": "direct",
       "durable": true,
       "auto_delete": false,
@@ -74,7 +74,7 @@
     },
     {
       "name": "DLExchange",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "type": "topic",
       "durable": true,
       "auto_delete": false,
@@ -83,7 +83,7 @@
     },
     {
       "name": "RequestInfoExchange",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "type": "direct",
       "durable": true,
       "auto_delete": false,
@@ -92,7 +92,7 @@
     },
     {
       "name": "FatalLoggingExchange",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "type": "direct",
       "durable": true,
       "auto_delete": false,
@@ -103,70 +103,70 @@
   "queues": [
     {
       "name": "FileCollectionInfoQueue",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
     },
     {
       "name": "RequestQueue",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
     },
     {
       "name": "ExtractedFileToVerifyQueue",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
     },
     {
       "name": "ExtractedFileNoVerifyQueue",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
     },
     {
       "name": "ExtractFileAnonQueue",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
     },
     {
       "name": "ExtractFileIdentQueue",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
     },
     {
       "name": "DLQueue",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
     },
     {
       "name": "RequestInfoQueue",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
     },
     {
       "name": "ExtractedFileVerifiedQueue",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
     },
     {
       "name": "FatalLoggingQueue",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
@@ -175,7 +175,7 @@
   "bindings": [
     {
       "source": "DLExchange",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "destination": "DLQueue",
       "destination_type": "queue",
       "routing_key": "#",
@@ -183,7 +183,7 @@
     },
     {
       "source": "FileCollectionInfoExchange",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "destination": "FileCollectionInfoQueue",
       "destination_type": "queue",
       "routing_key": "",
@@ -191,7 +191,7 @@
     },
     {
       "source": "ExtractFileExchange",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "destination": "ExtractFileAnonQueue",
       "destination_type": "queue",
       "routing_key": "anon",
@@ -199,7 +199,7 @@
     },
     {
       "source": "ExtractFileExchange",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "destination": "ExtractFileIdentQueue",
       "destination_type": "queue",
       "routing_key": "ident",
@@ -207,7 +207,7 @@
     },
     {
       "source": "ExtractedFileStatusExchange",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "destination": "ExtractedFileToVerifyQueue",
       "destination_type": "queue",
       "routing_key": "verify",
@@ -215,7 +215,7 @@
     },
     {
       "source": "ExtractedFileStatusExchange",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "destination": "ExtractedFileNoVerifyQueue",
       "destination_type": "queue",
       "routing_key": "noverify",
@@ -223,7 +223,7 @@
     },
     {
       "source": "RequestExchange",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "destination": "RequestQueue",
       "destination_type": "queue",
       "routing_key": "",
@@ -231,7 +231,7 @@
     },
     {
       "source": "RequestInfoExchange",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "destination": "RequestInfoQueue",
       "destination_type": "queue",
       "routing_key": "",
@@ -239,7 +239,7 @@
     },
     {
       "source": "ExtractedFileVerifiedExchange",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "destination": "ExtractedFileVerifiedQueue",
       "destination_type": "queue",
       "routing_key": "",
@@ -247,7 +247,7 @@
     },
     {
       "source": "FatalLoggingExchange",
-      "vhost": "smi_{{ config_name }}_file_extract",
+      "vhost": "smi_{{ env_name }}_file_extract",
       "destination": "FatalLoggingQueue",
       "destination_type": "queue",
       "routing_key": "",

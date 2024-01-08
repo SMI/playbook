@@ -2,15 +2,12 @@
 
 set -euxo pipefail
 
+# NOTE(rkm 2023-11-29) Use the current python interpreter instead
+# of the system default
+local_python="$(command -v python || true)"
+
 ansible-playbook \
-    --connection local \
-    --inventory "localhost," \
-    -e "ansible_python_interpreter=$(command -v python || true)" \
-    -e "smi_preflight_group_name=${USER}" \
-    -e "smi_service_software_install_dir=${HOME}/opt/epcc/smi" \
-    -e "smi_service_software_allow_create_install_dir=true" \
-    -e "smi_service_software_allow_create_logs_dir=true" \
-    -e "smi_service_software_allow_create_pacs_dir=true" \
-    -e "smi_service_software_allow_create_extract_dir=true" \
+    --inventory inventories/local/hosts.ini \
+    -e "ansible_python_interpreter=${local_python}" \
     "${@}" \
     site.yml

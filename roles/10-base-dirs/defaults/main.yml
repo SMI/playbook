@@ -1,0 +1,14 @@
+---
+smi_base_dirs_software_dir: "{{ smi_fs_software_root }}"
+smi_base_dirs_allow_create_software_dir: false
+
+smi_base_dirs_allow_create_dirs: false
+
+smi_base_dirs_logs_dir: "{{ smi_fs_data_root }}/logs"
+smi_base_dirs_allow_create_logs_dir: false
+
+smi_base_dirs_pacs_dir: "{{ smi_fs_data_root }}/PACS"
+smi_base_dirs_allow_create_pacs_dir: false
+
+smi_base_dirs_extractions_dir: "{{ smi_fs_data_root }}/extractions"
+smi_base_dirs_allow_create_extractions_dir: false

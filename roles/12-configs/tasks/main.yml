@@ -1,0 +1,22 @@
+---
+- name: Ensure configs directory exists
+  become: true
+  ansible.builtin.file:
+    name: "{{ smi_configs_configs_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: u=rwx,g=rx,o=rx
+
+- name: Check if correct config directories exist
+  ansible.builtin.stat:
+    path: "{{ smi_configs_configs_dir }}/{{ item.path }}"
+  with_community.general.filetree: "{{ smi_configs_local_configs_template_dir }}/"
+  when: item.state == "directory" and "/" not in item.path
+  register: stat_result
+
+- name: Include deploy_config_dir.yml
+  ansible.builtin.include_tasks: deploy_config_dir.yml
+  with_items: "{{ stat_result | json_query('results[?!(stat.exists)&&!skipped].item.path') }}"
+  loop_control:
+    loop_var: env_name

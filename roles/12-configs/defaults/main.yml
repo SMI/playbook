@@ -1,0 +1,24 @@
+---
+smi_configs_configs_dir: "{{ smi_fs_software_root }}/configs"
+smi_configs_data_dir: "{{ smi_fs_software_root }}/data"
+smi_configs_software_dir: "{{ smi_fs_software_root }}/software"
+
+smi_configs_logs_dir: "{{ smi_fs_data_root }}/logs"
+smi_configs_pacs_dir: "{{ smi_fs_data_root }}/PACS"
+smi_configs_extractions_dir: "{{ smi_fs_data_root }}/extractions"
+
+# Override this with an absolute path to a local directory of configs
+smi_configs_local_configs_template_dir: templates
+
+smi_configs_rabbitmq_hostname: "{{ groups['rabbitmq'][0] | default('localhost') }}"
+smi_configs_mongodb_hostname: "{{ groups['mongodb'][0] | default('localhost') }}"
+smi_configs_rdmp_catalogue_conn_str: "{{
+  groups['rdmp'][0] |
+  default('server=localhost;uid=SA;password=smiMsSql1.;database=RDMP_Catalogue;Encrypt=false') }}"
+smi_configs_rdmp_data_export_conn_str: "{{
+  groups['rdmp'][0] |
+  default('server=localhost;uid=SA;password=smiMsSql1.;database=RDMP_DataExport;Encrypt=false') }}"
+
+# TODO(rkm 2023-11-28) Template these two like the variables above
+smi_configs_patient_id_map_connection_string: "Server=localhost;Uid=root;Pwd=myStrongPassw0rd!;"
+smi_configs_patient_id_cache_connection_string: "localhost"

@@ -1,0 +1,5 @@
+---
+smi_preflight_group_name: "{{ lookup('env', 'USER') }}"
+smi_fs_software_root: "{{ lookup('env', 'HOME') }}/opt/epcc/smi/software"
+smi_fs_data_root: "{{ lookup('env', 'HOME') }}/opt/epcc/smi/data"
+smi_base_dirs_allow_create_dirs: true

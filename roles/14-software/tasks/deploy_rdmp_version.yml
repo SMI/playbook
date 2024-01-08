@@ -1,8 +1,8 @@
 ---
 - name: Set rdmp_version_data
   ansible.builtin.set_fact:
-    rdmp_version_data: "{{ smi_service_software_rdmp[rdmp_version_or_sha] }}"
-    rdmp_software_version_dir: "{{ smi_service_software_install_dir }}/software/RDMP/v{{ rdmp_version_or_sha }}"
+    rdmp_version_data: "{{ smi_software_rdmp[rdmp_version_or_sha] }}"
+    rdmp_software_version_dir: "{{ smi_software_software_dir }}/RDMP/v{{ rdmp_version_or_sha }}"
 
 - name: Insert versions into raw package names
   ansible.builtin.set_fact:
@@ -48,7 +48,7 @@
   ansible.builtin.file:
     path: "{{ rdmp_tempdir.path }}/rdmp-{{ rdmp_version_or_sha }}-cli-linux/{{ item }}"
     state: absent
-  with_items: "{{ smi_service_software_rdmp_file_blocklist }}"
+  with_items: "{{ smi_software_rdmp_file_blocklist }}"
 
 - name: Copy rdmp-cli binary to destination
   become: true

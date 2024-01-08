@@ -1,8 +1,13 @@
 ---
+- name: Set config_env_dir
+  ansible.builtin.set_fact:
+    env_config_dir: "{{ smi_configs_configs_dir }}/{{ env_name }}"
+    env_logs_dir: "{{ smi_configs_logs_dir }}/{{ env_name }}"
+
 - name: Ensure config dir exists
   become: true
   ansible.builtin.file:
-    path: "{{ smi_service_software_install_dir }}/configs/{{ config_name }}"
+    path: "{{ env_config_dir }}"
     state: directory
     owner: root
     group: root
@@ -11,7 +16,7 @@
 - name: Ensure config logs dir exists
   become: true
   ansible.builtin.file:
-    path: "{{ smi_service_software_logs_dir }}/{{ config_name }}"
+    path: "{{ env_logs_dir }}"
     owner: root
     group: "{{ smi_preflight_group_name }}"
     state: directory
@@ -24,14 +29,14 @@
       regex_search('SMI_SMISERVICES_VERSION=\"(.*)\"', '\\1') |
       first }}"
   vars:
-    env_path: "{{ smi_service_software_local_configs_template_dir }}/{{ config_name }}/env.bash"
+    env_path: "{{ smi_configs_local_configs_template_dir }}/{{ env_name }}/env.bash"
 
 - name: Template config files
   become: true
   ansible.builtin.template:
     src: "{{ item }}"
-    dest: "{{ smi_service_software_install_dir }}/configs/{{ config_name }}/{{ item | basename }}"
+    dest: "{{ env_config_dir }}/{{ item | basename }}"
     mode: u=rw,g=r,o=r
-  with_ansible.builtin.fileglob: "{{ smi_service_software_local_configs_template_dir }}/{{ config_name }}/*"
+  with_ansible.builtin.fileglob: "{{ smi_configs_local_configs_template_dir }}/{{ env_name }}/*"
   register: config_files
   notify: "service_software : Upload changed RabbitMQ configs"

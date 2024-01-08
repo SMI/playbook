@@ -1,0 +1,5 @@
+---
+smi_data_data_dir: "{{ smi_g_install_dir | default('/tmp/epcc/smi') }}/data"
+
+smi_data_tessdata_version_or_sha: "4.1.0"
+smi_data_tessdata_checksum: "md5:57e0df3d84fed9fbf8c7a8e589f8f012"

@@ -2,9 +2,9 @@
 # {{ ansible_managed }}
 
 RabbitOptions:
-  RabbitMqHostName: "{{ smi_service_software_rabbitmq_hostname }}"
+  RabbitMqHostName: "{{ smi_configs_rabbitmq_hostname }}"
   RabbitMqHostPort: 5672
-  RabbitMqVirtualHost: "smi_{{ config_name }}_file_extract"
+  RabbitMqVirtualHost: "smi_{{ env_name }}_file_extract"
   RabbitMqUserName: "guest"
   RabbitMqPassword: "guest"
   RabbitMqControlExchangeName: "ControlExchange"
@@ -12,22 +12,22 @@ RabbitOptions:
 
 LoggingOptions:
   LogConfigFile: "{{ template_destpath | dirname }}/NLog.config.xml"
-  LogsRoot: "{{ smi_service_software_logs_dir }}/{{ config_name }}"
+  LogsRoot: "{{ env_logs_dir }}"
   TraceLogging: true
 
 FileSystemOptions:
-  FileSystemRoot: "{{ smi_service_software_pacs_dir }}"
-  ExtractRoot: "{{ smi_service_software_extract_dir }}"
+  FileSystemRoot: "{{ smi_configs_pacs_dir }}"
+  ExtractRoot: "{{ smi_configs_extractions_dir }}"
   DicomSearchPattern: "*.dcm"
 
 RDMPOptions:
-  # CatalogueConnectionString: "{{ smi_service_software_rdmp_catalogue_conn_str }}"
+  # CatalogueConnectionString: "{{ smi_configs_rdmp_catalogue_conn_str }}"
   YamlDir:
-  DataExportConnectionString: "{{ smi_service_software_rdmp_data_export_conn_str }}"
+  DataExportConnectionString: "{{ smi_configs_rdmp_data_export_conn_str }}"
 
 MongoDatabases:
   ExtractionStoreOptions:
-    HostName: "{{ smi_service_software_mongodb_hostname }}"
+    HostName: "{{ smi_configs_mongodb_hostname }}"
     Port: 27017
     UserName: ""
     Password: ""
@@ -70,7 +70,7 @@ CohortExtractorOptions:
 CTPAnonymiserOptions:
   VerifyRoutingKey: verify
   NoVerifyRoutingKey: noverify
-  SRAnonTool: "{{ smi_service_software_install_dir }}/software/SmiServices/v{{ config_smiservices_version }}/CTP_SRAnonTool.sh"
+  SRAnonTool: "{{ smi_configs_software_dir }}/SmiServices/v{{ config_smiservices_version }}/CTP_SRAnonTool.sh"
   AnonFileConsumerOptions:
     QueueName: "ExtractFileAnonQueue"
     QoSPrefetchCount: 1
@@ -93,7 +93,7 @@ IsIdentifiableServiceOptions:
   QoSPrefetchCount: 10
   AutoAck: false
   ClassifierType: "Microservices.IsIdentifiable.Service.TesseractStanfordDicomFileClassifier"
-  DataDirectory: "{{ smi_service_software_install_dir }}/data"
+  DataDirectory: "{{ smi_configs_data_dir }}"
   IsIdentifiableProducerOptions:
     ExchangeName: "ExtractedFileVerifiedExchange"
     MaxConfirmAttempts: 5

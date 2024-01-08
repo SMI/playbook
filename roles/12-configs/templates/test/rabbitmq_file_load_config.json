@@ -2,13 +2,13 @@
   "_comment": "{{ ansible_managed }}",
   "vhosts": [
     {
-      "name": "smi_{{ config_name }}_file_load"
+      "name": "smi_{{ env_name }}_file_load"
     }
   ],
   "policies": [
     {
       "name": "deadLetterDataLoad",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "pattern": "",
       "apply-to": "queues",
       "definition": {
@@ -20,7 +20,7 @@
   "exchanges": [
     {
       "name": "AccessionDirectoryExchange",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "type": "direct",
       "durable": true,
       "auto_delete": false,
@@ -29,7 +29,7 @@
     },
     {
       "name": "IdentifiableImageExchange",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "type": "direct",
       "durable": true,
       "auto_delete": false,
@@ -38,7 +38,7 @@
     },
     {
       "name": "IdentifiableSeriesExchange",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "type": "direct",
       "durable": true,
       "auto_delete": false,
@@ -47,7 +47,7 @@
     },
     {
       "name": "AnonymousImageExchange",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "type": "direct",
       "durable": true,
       "auto_delete": false,
@@ -56,7 +56,7 @@
     },
     {
       "name": "ControlExchange",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "type": "topic",
       "durable": true,
       "auto_delete": false,
@@ -65,7 +65,7 @@
     },
     {
       "name": "DLExchange",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "type": "topic",
       "durable": true,
       "auto_delete": false,
@@ -74,7 +74,7 @@
     },
     {
       "name": "FatalLoggingExchange",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "type": "direct",
       "durable": true,
       "auto_delete": false,
@@ -85,49 +85,49 @@
   "queues": [
     {
       "name": "AccessionDirectoryQueue",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
     },
     {
       "name": "IdentifiableImageQueue",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
     },
     {
       "name": "MongoImageQueue",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
     },
     {
       "name": "MongoSeriesQueue",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
     },
     {
       "name": "AnonymousImageQueue",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
     },
     {
       "name": "DLQueue",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
     },
     {
       "name": "FatalLoggingQueue",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "durable": true,
       "auto_delete": false,
       "arguments": {}
@@ -136,7 +136,7 @@
   "bindings": [
     {
       "source": "AccessionDirectoryExchange",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "destination": "AccessionDirectoryQueue",
       "destination_type": "queue",
       "routing_key": "",
@@ -144,7 +144,7 @@
     },
     {
       "source": "IdentifiableImageExchange",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "destination": "IdentifiableImageQueue",
       "destination_type": "queue",
       "routing_key": "reprocessed",
@@ -152,7 +152,7 @@
     },
     {
       "source": "IdentifiableImageExchange",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "destination": "MongoImageQueue",
       "destination_type": "queue",
       "routing_key": "",
@@ -160,7 +160,7 @@
     },
     {
       "source": "IdentifiableSeriesExchange",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "destination": "MongoSeriesQueue",
       "destination_type": "queue",
       "routing_key": "",
@@ -168,7 +168,7 @@
     },
     {
       "source": "AnonymousImageExchange",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "destination": "AnonymousImageQueue",
       "destination_type": "queue",
       "routing_key": "",
@@ -176,7 +176,7 @@
     },
     {
       "source": "DLExchange",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "destination": "DLQueue",
       "destination_type": "queue",
       "routing_key": "#",
@@ -184,7 +184,7 @@
     },
     {
       "source": "FatalLoggingExchange",
-      "vhost": "smi_{{ config_name }}_file_load",
+      "vhost": "smi_{{ env_name }}_file_load",
       "destination": "FatalLoggingQueue",
       "destination_type": "queue",
       "routing_key": "",

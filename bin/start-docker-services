@@ -2,12 +2,14 @@
 
 set -euxo pipefail
 
+# NOTE(rkm 2023-11-29) Use the current python interpreter instead
+# of the system default
+local_python="$(command -v python || true)"
+
 ansible-playbook \
-    --connection local \
-    --inventory "localhost," \
-    -e "ansible_python_interpreter=$(command -v python || true)" \
-    -e "smi_preflight_group_name=${USER}" \
+    --inventory inventories/local/hosts.ini \
+    -e "ansible_python_interpreter=${local_python}" \
     -e "smi_docker_services_state=present" \
-    --tags docker \
+    --tags none,docker \
     "${@}" \
     site.yml

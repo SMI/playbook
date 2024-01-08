@@ -1,0 +1,38 @@
+---
+- name: Ensure software directory exists
+  become: true
+  ansible.builtin.file:
+    name: "{{ smi_software_software_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: u=rwx,g=rx,o=rx
+
+- name: Check if correct SmiServices versions exist
+  ansible.builtin.stat:
+    path: "{{ smi_software_software_dir }}/SmiServices/v{{ item }}"
+  with_items: "{{ smi_software_smiservices.keys() }}"
+  register: stat_result
+
+- name: Verify smi_software_smiservices contains smi_software_smiservices_default_version
+  ansible.builtin.assert:
+    that: smi_software_smiservices_default_version in smi_software_smiservices.keys()
+    msg: "smi_software_smiservices_default_version must be listed in smi_software_smiservices"
+
+- name: Include deploy_smiservices_version.yml for missing SmiServices versions
+  ansible.builtin.include_tasks: deploy_smiservices_version.yml
+  with_items: "{{ stat_result | json_query('results[?!(stat.exists)].item') }}"
+  loop_control:
+    loop_var: smiservices_version_or_sha
+
+- name: Check if correct RDMP versions exist
+  ansible.builtin.stat:
+    path: "{{ smi_software_software_dir }}/RDMP/v{{ item }}"
+  with_items: "{{ smi_software_rdmp.keys() }}"
+  register: stat_result
+
+- name: Include deploy_rdmp_version.yml for missing rdmp-cli versions
+  ansible.builtin.include_tasks: deploy_rdmp_version.yml
+  with_items: "{{ stat_result | json_query('results[?!(stat.exists)].item') }}"
+  loop_control:
+    loop_var: rdmp_version_or_sha

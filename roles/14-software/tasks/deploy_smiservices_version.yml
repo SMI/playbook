@@ -1,8 +1,8 @@
 ---
 - name: Set smiservices_version_data
   ansible.builtin.set_fact:
-    smiservices_version_data: "{{ smi_service_software_smiservices[smiservices_version_or_sha] }}"
-    smiservices_software_version_dir: "{{ smi_service_software_install_dir }}/software/SmiServices/v{{ smiservices_version_or_sha }}"
+    smiservices_version_data: "{{ smi_software_smiservices[smiservices_version_or_sha] }}"
+    smiservices_software_version_dir: "{{ smi_software_software_dir }}/SmiServices/v{{ smiservices_version_or_sha }}"
 
 - name: Insert versions into raw package names
   ansible.builtin.set_fact:
@@ -56,7 +56,7 @@
   ansible.builtin.file:
     path: "{{ smiservices_tempdir.path }}/smi-services-v{{ smiservices_version_or_sha }}-linux-x64/{{ item }}"
     state: absent
-  with_items: "{{ smi_service_software_smiservices_file_blocklist }}"
+  with_items: "{{ smi_software_smiservices_file_blocklist }}"
 
 - name: Copy SmiServices binaries to destination
   become: true
